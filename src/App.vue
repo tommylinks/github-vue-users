@@ -1,32 +1,92 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+      <header id="header">
+          <router-link to="/">
+              <h3>GitHub users</h3>
+          </router-link>
+          <search></search>
+      </header>
+      <aside id="sidebar">
+          <router-link to="/">Пользователи</router-link>
+          <router-link to="/selected">Выбранные пользователи</router-link>
+      </aside>
+      <div id="content">
+          <router-view/>
+      </div>
+      <footer id="footer">Footer</footer>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+    import Search from "@/components/Search"
+    export default {
+      components: {
+        Search
+      }
+    }
 
-#nav {
-  padding: 30px;
-}
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="sass">
+body
+    margin: 0
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+ul
+    margin: 0
+    padding: 0
+    li
+        list-style-type: none
+
+a
+    text-decoration: none
+
+#app
+    display: grid
+    grid-template-areas: "header header" "aside content" "footer footer"
+    grid-template-rows: 60px 1fr 60px
+    grid-template-columns: 20% 1fr
+    height: 100vh
+    margin: 0
+    background-color: #fff
+    font-family: "Segoe UI", "Roboto", sans-serif
+    color: #2e2e2e
+
+header, footer, #content, #sidebar
+    padding: 20px
+
+#header
+    grid-area: header
+    display: flex
+    align-items: center
+    background-color: #24292e
+    color: #fff
+    h3
+        margin: 0
+        color: #fff
+
+#footer
+    grid-area: footer
+    border-top: 1px solid #e1e1e1
+    text-align: center
+
+#content
+    grid-area: content
+    background-color: #f6f8fa
+
+#sidebar
+    grid-area: aside
+
+    a
+        display: block
+        padding: 20px 8px
+        border-bottom: 1px solid #e1e1e1
+        text-transform: uppercase
+        color: #2e2e2e
+        transition: background-color .3s
+        &:last-child
+            border: none
+        &:hover, &.router-link-exact-active
+            background-color: #f6f8fa
+
+
 </style>
